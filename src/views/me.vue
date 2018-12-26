@@ -17,13 +17,10 @@ export default {
 
   components: {},
 
-  mounted () {},
+  mounted () { },
 
   methods: {}
 
 }
 
 </script>
-<style lang='scss' scoped>
-
-</style>
