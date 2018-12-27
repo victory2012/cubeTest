@@ -29,8 +29,9 @@ export default {
   methods: {
     touchstart(e) {
       this.touchPointer = e.touches[0].pageX;
+      console.log('this.touchPointer ==>>>', this.touchPointer);
     },
-    touchend(e) {
+    touchend() {
       // const touchendPointer = e.changedTouches[0].pageX;
       console.log('this.touchendPointer ==>>>', this.touchendPointer);
       console.log('this.touchPointer ==>>>', this.touchPointer);
@@ -51,6 +52,7 @@ export default {
     },
     touchmove(e) {
       this.touchendPointer = e.changedTouches[0].pageX;
+      console.log('this.touchendPointer ==>>>', this.touchendPointer);
     }
   }
 }
