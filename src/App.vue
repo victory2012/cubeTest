@@ -30,7 +30,10 @@ export default {
       this.touchPointer = e.touches[0].pageX;
     },
     touchend(e) {
+      console.log('event ==>>>', e);
       const touchendPointer = e.changedTouches[0].pageX;
+      console.log('this.touchPointer ===>>>', this.touchPointer);
+      console.log('touchendPointer ===>>>', touchendPointer);
       if (touchendPointer - this.touchPointer < -20) {
         this.routerIndex++
         if (this.routerIndex === this.routerPath.length) {
