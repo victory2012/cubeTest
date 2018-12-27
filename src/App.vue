@@ -32,14 +32,16 @@ export default {
     },
     touchend(e) {
       // const touchendPointer = e.changedTouches[0].pageX;
-      if (this.touchendPointer - this.touchPointer < -20) {
+      console.log('this.touchendPointer ==>>>', this.touchendPointer);
+      console.log('this.touchPointer ==>>>', this.touchPointer);
+      if (this.touchendPointer - this.touchPointer < -5) {
         this.routerIndex++
         if (this.routerIndex === this.routerPath.length) {
           this.routerIndex = this.routerPath.length - 1
         }
         this.$router.push(this.routerPath[this.routerIndex])
       }
-      if (this.touchendPointer - this.touchPointer > 20) {
+      if (this.touchendPointer - this.touchPointer > 5) {
         this.routerIndex--
         if (this.routerIndex < 0) {
           this.routerIndex = 0;
