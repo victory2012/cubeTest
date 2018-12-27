@@ -15,30 +15,30 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       touchPointer: 0,
       routerPath: ['home', 'battery', 'device', 'me'],
       routerIndex: 0
     }
   },
-  mounted () {
+  mounted() {
     this.routerIndex = this.routerPath.indexOf(this.$route.name)
   },
   methods: {
-    touchstart (e) {
+    touchstart(e) {
       this.touchPointer = e.touches[0].pageX;
     },
-    touchend (e) {
+    touchend(e) {
       const touchendPointer = e.changedTouches[0].pageX;
-      if (touchendPointer - this.touchPointer < -50) {
+      if (touchendPointer - this.touchPointer < -20) {
         this.routerIndex++
         if (this.routerIndex === this.routerPath.length) {
           this.routerIndex = this.routerPath.length - 1
         }
         this.$router.push(this.routerPath[this.routerIndex])
       }
-      if (touchendPointer - this.touchPointer > 50) {
+      if (touchendPointer - this.touchPointer > 20) {
         this.routerIndex--
         if (this.routerIndex < 0) {
           this.routerIndex = 0;
@@ -86,6 +86,7 @@ export default {
     height: 45px;
     line-height: 45px;
     display: flex;
+    background: #ffffff;
 
     a {
       font-weight: bold;
