@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav" @touchstart='touchstart' @touchend='touchend'>
+    <div id="nav" @touchstart='touchstart' @touchend='touchend' @touchmove="touchmove">
       <transition name="slide-fade" mode="out-in">
         <router-view />
       </transition>
@@ -19,7 +19,8 @@ export default {
     return {
       touchPointer: 0,
       routerPath: ['home', 'battery', 'device', 'me'],
-      routerIndex: 0
+      routerIndex: 0,
+      touchendPointer: 0
     }
   },
   mounted() {
@@ -30,24 +31,24 @@ export default {
       this.touchPointer = e.touches[0].pageX;
     },
     touchend(e) {
-      console.log('event ==>>>', e);
-      const touchendPointer = e.changedTouches[0].pageX;
-      console.log('this.touchPointer ===>>>', this.touchPointer);
-      console.log('touchendPointer ===>>>', touchendPointer);
-      if (touchendPointer - this.touchPointer < -20) {
+      // const touchendPointer = e.changedTouches[0].pageX;
+      if (this.touchendPointer - this.touchPointer < -20) {
         this.routerIndex++
         if (this.routerIndex === this.routerPath.length) {
           this.routerIndex = this.routerPath.length - 1
         }
         this.$router.push(this.routerPath[this.routerIndex])
       }
-      if (touchendPointer - this.touchPointer > 20) {
+      if (this.touchendPointer - this.touchPointer > 20) {
         this.routerIndex--
         if (this.routerIndex < 0) {
           this.routerIndex = 0;
         }
         this.$router.push(this.routerPath[this.routerIndex])
       }
+    },
+    touchmove(e) {
+      this.touchendPointer = e.changedTouches[0].pageX;
     }
   }
 }
