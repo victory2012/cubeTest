@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav" @touchstart='touchstart' @touchend='touchend' @touchmove="touchmove">
+    <div id="nav" @touchstart.prevent='touchstart' @touchend.prevent='touchend' @touchmove.prevent="touchmove">
       <transition name="slide-fade" mode="out-in">
         <router-view />
       </transition>
@@ -31,18 +31,16 @@ export default {
       this.touchPointer = e.touches[0].pageX;
       console.log('this.touchPointer ==>>>', this.touchPointer);
     },
-    touchend() {
-      // const touchendPointer = e.changedTouches[0].pageX;
-      console.log('this.touchendPointer ==>>>', this.touchendPointer);
-      console.log('this.touchPointer ==>>>', this.touchPointer);
-      if (this.touchendPointer - this.touchPointer < -5) {
+    touchend(e) {
+      console.log('touchend ==>>>', e.changedTouches[0].pageX);
+      if (this.touchendPointer - this.touchPointer < -20) {
         this.routerIndex++
         if (this.routerIndex === this.routerPath.length) {
           this.routerIndex = this.routerPath.length - 1
         }
         this.$router.push(this.routerPath[this.routerIndex])
       }
-      if (this.touchendPointer - this.touchPointer > 5) {
+      if (this.touchendPointer - this.touchPointer > 20) {
         this.routerIndex--
         if (this.routerIndex < 0) {
           this.routerIndex = 0;
@@ -51,7 +49,7 @@ export default {
       }
     },
     touchmove(e) {
-      this.touchendPointer = e.changedTouches[0].pageX;
+      this.touchendPointer = e.touches[0].pageX;
       console.log('this.touchendPointer ==>>>', this.touchendPointer);
     }
   }
